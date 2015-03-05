@@ -21,8 +21,8 @@ module Synapse
       raise "haproxy config section is missing" unless opts.has_key?('haproxy')
       @haproxy = Haproxy.new(opts['haproxy'])
 
-      # configuration is initially enabled to configure on first loop
-      @config_updated = true
+      # Prevent 503 errors on startup
+      @config_updated = false
 
       # Any exceptions in the watcher threads should wake the main thread so
       # that we can fail fast.
