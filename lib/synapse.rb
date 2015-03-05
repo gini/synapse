@@ -30,8 +30,8 @@ module Synapse
         @config_generators << FileOutput.new(opts['file_output'])
       end
 
-      # configuration is initially enabled to configure on first loop
-      @config_updated = true
+      # Prevent 503 errors on startup
+      @config_updated = false
 
       # Any exceptions in the watcher threads should wake the main thread so
       # that we can fail fast.
